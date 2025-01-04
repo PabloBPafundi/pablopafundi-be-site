@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Curriculum Vitae</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            background-color: white;
+            color: #333;
+            margin: 5px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .section {
+            max-width: 800px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 5px;
+        }
+        .section h2 {
+            font-size: 20px;
+            color: #4a90e2;
+            border-bottom: 2px solid #4a90e2;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        .profile-container {
+            display: block;
+            margin-bottom: 20px;
+        }
+        .profile-container img {
+            width: 80px;
+            height: 80px;
+            border: 4px solid #4a90e2;
+            display: block;
+            margin: 0 auto;
+        }
+        .profile-details {
+            margin-top: 15px;
+            text-align: center;
+        }
+        .profile-details p {
+            margin: 5px 0;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .list-item {
+            margin-bottom: 10px;
+        }
+        .skillsList {
+            display: inline-block;
+        }
+        .skillsList span {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #f4f4f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 12px;
+            margin-right: 10px;
+            margin-bottom: 5px;
+        }
+        .contact ul {
+            margin-top: 0;
+        }
+        .contact li {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .contact li strong {
+            color: #4a90e2;
+        }
+    </style>
+</head>
+<body>
+<div>
+
+    <div class="section profile">
+        <h2 th:if="${language.toString().toLowerCase() == 'es'}" th:text="'Perfil'"></h2>
+        <h2 th:if="${language.toString().toLowerCase() == 'en'}" th:text="'Profile'"></h2>
+        <div class="profile-container">
+            <img th:src="@{file:./src/main/resources/{imageName}(imageName=${profile.profileImageUrl})}" alt="Profile Image" src=""/>
+            <div class="profile-details">
+
+                <p><strong th:if="${language.toString().toLowerCase() == 'es'}" th:text="'Residencia:'"></strong></p>
+                <p><strong th:if="${language.toString().toLowerCase() == 'en'}" th:text="'Residency:'"></strong></p>
+
+
+                <span th:text="${profile.residency}"></span>
+
+
+                <p><strong th:if="${language.toString().toLowerCase() == 'es'}" th:text="'Sobre Mi:'"></strong></p>
+                <p><strong th:if="${language.toString().toLowerCase() == 'en'}" th:text="'About Me:'"></strong></p>
+
+
+
+                <p th:text="${profile.aboutMe}"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section work-experience">
+        <h2 th:if="${language.toString().toLowerCase() == 'es'}" th:text="'Experiencia Laboral'"></h2>
+        <h2 th:if="${language.toString().toLowerCase() == 'en'}" th:text="'Work Experience'"></h2>
+        <ul>
+            <li class="list-item" th:each="work : ${workExperience}">
+                <strong th:text="${work.name}"></strong>
+                (<span th:text="${work.dateStart != null ? #temporals.format(work.dateStart, 'yyyy-MM') : 'Fecha no disponible'}"></span> -
+                <span th:text="${work.dateEnd != null and work.dateEnd != '' ? work.dateEnd : 'Presente'}"></span>)
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2 th:if="${language.toString().toLowerCase() == 'es'}" th:text="'Conocimientos'"></h2>
+        <h2 th:if="${language.toString().toLowerCase() == 'en'}" th:text="'Skills'"></h2>
+        <div class="skillsList">
+            <span th:each="skill : ${knowledge}" th:text="${skill.name} + ' (' + ${skill.skillLevel} + ')' "></span>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 th:if="${language.toString().toLowerCase() == 'es'}" th:text="'Idiomas'"></h2>
+        <h2 th:if="${language.toString().toLowerCase() == 'en'}" th:text="'Languages'"></h2>
+        <div class="skillsList">
+            <span th:each="languages : ${knowLedgeLanguages}" th:text="${languages.name} + ' (' + ${languages.skillLevel} + ')' "></span>
+        </div>
+    </div>
+
+    <div class="section education">
+        <h2 th:if="${language.toString().toLowerCase() == 'es'}" th:text="'Educación'"></h2>
+        <h2 th:if="${language.toString().toLowerCase() == 'en'}" th:text="'Education'"></h2>
+        <ul>
+            <li class="list-item" th:each="edu : ${education}">
+                <strong th:text="${edu.name}"></strong>
+                (<span th:text="${edu.dateStart != null ? #temporals.format(edu.dateStart, 'yyyy-MM') : 'Fecha no disponible'}"></span> -
+                <span th:text="${edu.dateEnd != null and edu.dateEnd != '' ? #temporals.format(edu.dateEnd, 'yyyy-MM') : 'Presente'}"></span>)
+            </li>
+        </ul>
+    </div>
+
+    <div class="section contact">
+        <h2 th:if="${language.toString().toLowerCase() == 'es'}" th:text="'Contacto'"></h2>
+        <h2 th:if="${language.toString().toLowerCase() == 'en'}" th:text="'Contact'"></h2>
+        <ul>
+            <li class="list-item" th:each="contact : ${contact}">
+                <strong th:text="${contact.channel}"></strong>:
+                <span th:if="${contact.channel.toString().toLowerCase() == 'linkedin'}" th:text="${contact.url}"></span>
+                <span th:unless="${contact.channel.toString().toLowerCase() == 'linkedin'}" th:text="${contact.contactDescription}"></span>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
