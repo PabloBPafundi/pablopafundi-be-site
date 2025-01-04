@@ -1,6 +1,5 @@
 package com.pablopafundi.site.user;
 
-import com.pablopafundi.site.config.JwtService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

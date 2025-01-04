@@ -1,6 +1,5 @@
 package com.pablopafundi.site.portfolio;
 
-import com.pablopafundi.site.common.domain.BaseEntity;
 import com.pablopafundi.site.common.domain.BaseWithLang;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

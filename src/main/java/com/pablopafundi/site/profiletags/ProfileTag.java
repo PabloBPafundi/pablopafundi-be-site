@@ -2,7 +2,6 @@ package com.pablopafundi.site.profiletags;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.pablopafundi.site.common.domain.BaseEntity;
-import com.pablopafundi.site.common.domain.BaseWithLang;
 import com.pablopafundi.site.myprofile.MyProfile;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

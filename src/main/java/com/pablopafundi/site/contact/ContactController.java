@@ -1,8 +1,6 @@
 package com.pablopafundi.site.contact;
 
 import com.pablopafundi.site.common.domain.LanguageEnum;
-import com.pablopafundi.site.portfolio.PortfolioDTO;
-import com.pablopafundi.site.portfolio.PortfolioResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,6 @@
 package com.pablopafundi.site.portfolio;
 
-import com.pablopafundi.site.achivement.AchievementDTO;
-import com.pablopafundi.site.achivement.AchievementResponseDTO;
+
 import com.pablopafundi.site.common.domain.LanguageEnum;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

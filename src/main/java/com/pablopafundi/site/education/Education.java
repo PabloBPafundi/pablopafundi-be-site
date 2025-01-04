@@ -1,9 +1,7 @@
 package com.pablopafundi.site.education;
 
 import com.pablopafundi.site.common.domain.BaseExperience;
-import com.pablopafundi.site.common.domain.BaseWithLang;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

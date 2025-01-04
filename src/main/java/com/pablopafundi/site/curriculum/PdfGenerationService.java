@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
-
 import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
 import java.util.List;
 
 @Service
