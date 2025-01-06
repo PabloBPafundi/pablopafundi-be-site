@@ -16,12 +16,12 @@ public class SiteApplication {
 
 	public static void main(String[] args) {SpringApplication.run(SiteApplication.class, args);}
 
+
+	/*
 	@Bean
 	CommandLineRunner user(UserService userService, MyProfileService myProfileService) {
 		return args -> {
-			// Verificar si el usuario 'admin' ya existe en la base de datos
 			if (!userService.userExistsByUserName("admin")) {
-				// Crear el usuario admin utilizando el método del servicio
 				userService.createUser("admin", "admin_password", Role.ADMIN);
 				System.out.println("Usuario 'admin' creado correctamente.");
 			} else {
@@ -29,5 +29,7 @@ public class SiteApplication {
 			}
 
 		};
-	}
+
+
+	}*/
 }

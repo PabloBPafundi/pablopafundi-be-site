@@ -1,10 +1,7 @@
 package com.pablopafundi.site.common.domain;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -18,7 +15,7 @@ public abstract class BaseWithLang extends BaseEntity{
 
     //@NotNull
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "lang", nullable = false)
     private LanguageEnum lang;
 
 

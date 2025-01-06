@@ -10,8 +10,9 @@ import lombok.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(
         name = "knowledge",
-        indexes = @Index(name = "idx_knowledge_lang", columnList = "lang")
-)
+        indexes = {
+                @Index(name = "idx_lang", columnList = "lang")
+        })
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
@@ -21,7 +22,7 @@ public class Knowledge extends BaseWithLang {
 
 
     @NotNull
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @NotNull

@@ -13,7 +13,11 @@ import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "app_user")
+@Table(
+        name = "app_user",
+        indexes = {
+                @Index(name = "idx_lang", columnList = "lang")
+        })
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
@@ -22,6 +26,7 @@ import java.util.List;
 @Builder
 public class User extends BaseEntity implements UserDetails {
 
+    @Column(unique = true)
     private String userName;
     private String password;
 

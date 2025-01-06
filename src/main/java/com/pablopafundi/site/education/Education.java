@@ -13,7 +13,11 @@ import java.time.LocalDate;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @AttributeOverride(name = "id", column = @Column(name = "id_education"))
-@Table(name = "education")
+@Table(
+        name = "education",
+        indexes = {
+                @Index(name = "idx_lang", columnList = "lang")
+        })
 @Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
 public class Education extends BaseExperience {

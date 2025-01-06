@@ -13,11 +13,13 @@ public class CORSConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
 
-        config.addAllowedOrigin("http://localhost:5173");  // React en desarrollo
-        config.addAllowedMethod("*");  // PERMITIR METODOS HTTP (GET, POST, etc.)
-        config.addAllowedHeader("*");  // PERMITIR TODOS LOS HEADER
+        config.addAllowedOriginPattern("https://pablopafundi-site.vercel.app");
+        config.addAllowedOriginPattern("https://*.pablopafundi-site.vercel.app"); // Subdominios
+        config.addAllowedOriginPattern("http://localhost:5173");  // React en desarrollo
 
-        // CORS a todas las rutas
+        config.addAllowedMethod("*");
+        config.addAllowedHeader("*");
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
 

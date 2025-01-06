@@ -15,7 +15,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @AttributeOverride(name = "id", column = @Column(name = "id_work_experience"))
-@Table(name = "work_experience")
+@Table(name = "work_experience",
+        indexes = {
+                @Index(name = "idx_lang", columnList = "lang")
+        })
 @Inheritance(strategy = InheritanceType.JOINED)
 public class WorkExperience extends BaseExperience {
 

@@ -17,9 +17,13 @@ import java.util.List;
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 @AttributeOverride(name = "id", column = @Column(name = "id_my_Profile"))
-@Table(name = "my_profile")
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
+@Table(
+        name = "my_profile",
+        indexes = {
+                @Index(name = "idx_lang", columnList = "lang")
+        })
 public class MyProfile extends BaseWithLang {
 
     private String residency;

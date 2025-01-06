@@ -1,6 +1,9 @@
 package com.pablopafundi.site.myprofile;
 
 
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
 import com.pablopafundi.site.common.domain.LanguageEnum;
 import com.pablopafundi.site.common.exception.BusinessLogicException;
 import jakarta.persistence.EntityNotFoundException;
@@ -23,9 +26,14 @@ public class MyProfileService {
     @Value("${image.upload.dir}")
     private String uploadDir;
 
+    @Value("${gcs.bucket.name}")
+    private String BUCKET_NAME;
+    private final Storage storage;
+
     public MyProfileService(MyProfileRepository myProfileRepository, MyProfileMapper myProfileMapper) {
         this.myProfileRepository = myProfileRepository;
         this.myProfileMapper = myProfileMapper;
+        this.storage = StorageOptions.getDefaultInstance().getService();
     }
 
     public MyProfileResponseDTO saveMyProfile(MyProfileDTO myProfileDTO, LanguageEnum lang) {
@@ -42,6 +50,33 @@ public class MyProfileService {
         return myProfileMapper.toMyProfileResponseDTO(savedMyProfile);
     }
 
+
+
+    public void uploadProfileImageBucket(MultipartFile file) {
+
+        List<MyProfile> profiles = myProfileRepository.findTop2ByIsActiveTrue();
+
+        if (profiles.size() != 2) {
+            throw new BusinessLogicException("In order to upload this image, there must be at least one active profile for every language available in the application. Please ensure that all languages have an active profile.");
+        }
+
+        String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+
+        // Subir la imagen a Google Cloud Storage
+        try {
+            BlobInfo blobInfo = BlobInfo.newBuilder(BUCKET_NAME, fileName).build();
+            storage.create(blobInfo, file.getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException("Error al subir la imagen", e);
+        }
+
+        // Guardar la URL pública de la imagen en la base de datos
+        String imageUrl = "https://storage.googleapis.com/" + BUCKET_NAME + "/" + fileName;
+        for (MyProfile profile : profiles) {
+            profile.setProfileImageUrl(imageUrl);
+            myProfileRepository.save(profile);
+        }
+    }
 
     public void uploadProfileImage(MultipartFile file) {
 
