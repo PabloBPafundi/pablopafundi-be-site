@@ -3,8 +3,10 @@ package com.pablopafundi.site.knowledge;
 
 
 import com.pablopafundi.site.common.domain.LanguageEnum;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,13 +31,25 @@ public class KnowledgeService {
 
 
     // Buscar conocimientos activos por idioma
+    /*
     public List<KnowledgeResponseDTO> findByIsActiveTrue(LanguageEnum lang) {
         return knowledgeRepository.findByIsActiveTrueAndLang(lang)
                 .stream()
                 .map(knowledgeMapper::toKnowledgeResponseDTO)
                 .collect(Collectors.toList());
-    }
+    }*/
 
+
+
+    @Async
+    public CompletableFuture<List<KnowledgeResponseDTO>> findByIsActiveTrue(LanguageEnum lang) {
+        List<KnowledgeResponseDTO> knowledge = knowledgeRepository.findByIsActiveTrueAndLang(lang)
+                .stream()
+                .map(knowledgeMapper::toKnowledgeResponseDTO)
+                .collect(Collectors.toList());
+
+        return CompletableFuture.completedFuture(knowledge);
+    }
 
 
 }

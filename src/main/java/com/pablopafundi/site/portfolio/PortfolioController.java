@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 public class PortfolioController {
@@ -17,9 +18,16 @@ public class PortfolioController {
         this.portfolioService = portfolioService;
     }
 
+    /*
     @GetMapping("public/{lang}/portfolio")
     public ResponseEntity<List<PortfolioResponseDTO>> getPortfolio(@PathVariable("lang") LanguageEnum lang){
         return ResponseEntity.ok(portfolioService.getPortfolio(lang));
+    }*/
+
+    @GetMapping("public/{lang}/portfolio")
+    public CompletableFuture<ResponseEntity<List<PortfolioResponseDTO>>> getAchievements(@PathVariable("lang") LanguageEnum lang) {
+        return portfolioService.getPortfolio(lang)
+                .thenApply(ResponseEntity::ok);
     }
 
     @PostMapping("/{lang}/portfolio")

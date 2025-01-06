@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 public class AchievementController {
@@ -19,8 +20,9 @@ public class AchievementController {
     }
 
     @GetMapping("public/{lang}/achievements")
-    public ResponseEntity<List<AchievementResponseDTO>> getAchievements(@PathVariable("lang") LanguageEnum lang){
-        return ResponseEntity.ok(achievementService.getAchievements(lang));
+    public CompletableFuture<ResponseEntity<List<AchievementResponseDTO>>> getAchievements(@PathVariable("lang") LanguageEnum lang) {
+        return achievementService.getAchievements(lang)
+                .thenApply(ResponseEntity::ok);
     }
 
     @PostMapping("/{lang}/achievements")

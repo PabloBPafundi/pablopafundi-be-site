@@ -1,9 +1,11 @@
 package com.pablopafundi.site.workexperience;
 
 import com.pablopafundi.site.common.domain.LanguageEnum;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,14 +20,25 @@ public class WorkExperienceService {
     }
 
 
-
+/*
     public List<WorkExperienceResponseDTO> getLastFourJobsExperiences(LanguageEnum lang){
 
         return workExperienceRepository.findTop4ByIsActiveAndLangOrderByDateStartDesc(true, lang)
                 .stream()
                 .map(workExperienceMapper::toworkExperienceResponseDTO)
                 .collect(Collectors.toList());
+    }*/
+
+    @Async
+    public CompletableFuture<List<WorkExperienceResponseDTO>> getLastFourJobsExperiences(LanguageEnum lang) {
+        List<WorkExperienceResponseDTO> workExperiences = workExperienceRepository.findTop4ByIsActiveAndLangOrderByDateStartDesc(true, lang)
+                .stream()
+                .map(workExperienceMapper::toworkExperienceResponseDTO)
+                .collect(Collectors.toList());
+
+        return CompletableFuture.completedFuture(workExperiences);
     }
+
 
 
     public WorkExperienceResponseDTO saveWorkExperience(WorkExperienceDTO workExperienceDTO, LanguageEnum lang){

@@ -7,9 +7,11 @@ import com.google.cloud.storage.StorageOptions;
 import com.pablopafundi.site.common.domain.LanguageEnum;
 import com.pablopafundi.site.common.exception.BusinessLogicException;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.scheduling.annotation.Async;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,6 +19,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class MyProfileService {
@@ -105,6 +108,7 @@ public class MyProfileService {
         }
     }
 
+    /*
     public MyProfileResponseDTO getAboutMe(LanguageEnum lang) {
 
         MyProfile profile = myProfileRepository
@@ -112,6 +116,17 @@ public class MyProfileService {
                 .orElseThrow(() -> new EntityNotFoundException("Profile with lenguage: '" + lang + "' not found "));
 
         return myProfileMapper.toMyProfileResponseDTO(profile);
+    }*/
+
+
+    @Transactional
+    @Async
+    public CompletableFuture<MyProfileResponseDTO> getAboutMe(LanguageEnum lang) {
+        MyProfile profile = myProfileRepository
+                .findTop1ByIsActiveTrueAndLangEquals(lang)
+                .orElseThrow(() -> new EntityNotFoundException("Profile with lenguage: '" + lang + "' not found "));
+
+        return CompletableFuture.completedFuture(myProfileMapper.toMyProfileResponseDTO(profile));
     }
 
 

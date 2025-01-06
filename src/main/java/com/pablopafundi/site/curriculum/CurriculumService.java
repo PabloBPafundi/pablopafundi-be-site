@@ -32,12 +32,12 @@ public class CurriculumService {
     public CurriculumDTO getCV(LanguageEnum lang){
 
         return CurriculumDTO.builder()
-                 .workExperience(workExperienceService.getLastFourJobsExperiences(lang))
-                 .education(educationService.getLastFourEducation(lang))
-                 .myProfile(myProfileService.getAboutMe(lang))
-                 .contact(contactService.getContact(lang))
-                 .knowledge(knowledgeService.findByIsActiveTrue(lang))
-                 .dateGenerate(LocalDate.now())
+                 //.workExperience(workExperienceService.getLastFourJobsExperiences(lang))
+                 //.education(educationService.getLastFourEducation(lang))
+                 //.myProfile(myProfileService.getAboutMe(lang))
+                 //.contact(contactService.getContact(lang))
+                 //.knowledge(knowledgeService.findByIsActiveTrue(lang))
+                 //.dateGenerate(LocalDate.now())
 
                  .build();
     }

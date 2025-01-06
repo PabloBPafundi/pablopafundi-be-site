@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 public class EducationController {
@@ -16,10 +17,18 @@ public class EducationController {
         this.educationService = educationService;
     }
 
-    @GetMapping("public/{lang}/education")
+    /*@GetMapping("public/{lang}/education")
     public ResponseEntity<List<EducationResponseDTO>> getLastFourEducation(@PathVariable("lang") LanguageEnum lang){
         return ResponseEntity.ok(educationService.getLastFourEducation(lang));
+    }*/
+
+
+    @GetMapping("public/{lang}/education")
+    public CompletableFuture<ResponseEntity<List<EducationResponseDTO>>> getLastFourEducation(@PathVariable("lang") LanguageEnum lang) {
+        return educationService.getLastFourEducation(lang)
+                .thenApply(ResponseEntity::ok);
     }
+
 
     @PostMapping("/{lang}/education")
     public ResponseEntity<EducationResponseDTO> saveEducation(@PathVariable("lang") LanguageEnum lang, @Valid @RequestBody EducationDTO educationDTO){

@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 public class MyProfileController {
@@ -94,11 +95,20 @@ public class MyProfileController {
 
 
     // ENDPOINT PARA OBTENER EL PERFIL COMPLETO
+    /*
     @GetMapping("/public/{lang}/my-profile")
     public ResponseEntity<MyProfileResponseDTO> getMyProfile(@PathVariable("lang") LanguageEnum lang) {
         MyProfileResponseDTO profile = myProfileService.getAboutMe(lang);
         return ResponseEntity.ok(profile);
+    }*/
+
+
+    @GetMapping("/public/{lang}/my-profile")
+    public CompletableFuture<ResponseEntity<MyProfileResponseDTO>> getMyProfile(@PathVariable("lang") LanguageEnum lang) {
+        return myProfileService.getAboutMe(lang)
+                .thenApply(ResponseEntity::ok);
     }
+
 
     // ENDPOINT PARA INSERTAR UN PERFIL
     @PostMapping("/{lang}/my-profile")
