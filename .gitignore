@@ -7,8 +7,6 @@ target/
 ### Ignorar la carpeta de pruebas ###
 src/test/
 
-###  Ignorar el Site Application ###
-src/main/java/com/pablopafundi/site/SiteApplication.java
 
 ### STS ###
 .apt_generated
@@ -42,4 +40,5 @@ build/
 # Ignorar archivos de configuración confidencial
 src/main/resources/application.properties
 src/main/resources/application.yml
+src/main/java/com/pablopafundi/site/SiteApplication.java
 .env
