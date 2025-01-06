@@ -17,12 +17,16 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @AttributeOverride(name = "id", column = @Column(name = "id_portfolio"))
-@Table(name = "portfolio")
+@Table(
+        name = "portfolio",
+        indexes = {
+                @Index(name = "idx_lang", columnList = "lang")
+        })
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Portfolio extends BaseWithLang {
 
     @NotBlank
-    @Column(nullable = false, length = 300)
+    @Column(nullable = false, length = 300, unique = true)
     private String name;
 
     @NotBlank

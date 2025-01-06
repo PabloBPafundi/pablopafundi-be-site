@@ -23,7 +23,7 @@
         }
         .section {
             max-width: 800px;
-            padding: 20px;
+            padding: 10px ;
             background: white;
             border-radius: 10px;
             border: 1px solid #ccc;
@@ -93,22 +93,14 @@
         <h2 th:if="${language.toString().toLowerCase() == 'es'}" th:text="'Perfil'"></h2>
         <h2 th:if="${language.toString().toLowerCase() == 'en'}" th:text="'Profile'"></h2>
         <div class="profile-container">
-            <img th:src="@{file:./src/main/resources/{imageName}(imageName=${profile.profileImageUrl})}" alt="Profile Image" src=""/>
+            <img th:src="@{file:imageName}(imageName=${profile.profileImageUrl})}" alt="Profile Image" src=""/>
             <div class="profile-details">
 
                 <p><strong th:if="${language.toString().toLowerCase() == 'es'}" th:text="'Residencia:'"></strong></p>
                 <p><strong th:if="${language.toString().toLowerCase() == 'en'}" th:text="'Residency:'"></strong></p>
 
-
                 <span th:text="${profile.residency}"></span>
 
-
-                <p><strong th:if="${language.toString().toLowerCase() == 'es'}" th:text="'Sobre Mi:'"></strong></p>
-                <p><strong th:if="${language.toString().toLowerCase() == 'en'}" th:text="'About Me:'"></strong></p>
-
-
-
-                <p th:text="${profile.aboutMe}"></p>
             </div>
         </div>
     </div>

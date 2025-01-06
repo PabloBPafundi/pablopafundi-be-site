@@ -7,6 +7,9 @@ target/
 ### Ignorar la carpeta de pruebas ###
 src/test/
 
+###  Ignorar el Site Application ###
+src/main/java/com/pablopafundi/site/SiteApplication
+
 ### STS ###
 .apt_generated
 .classpath

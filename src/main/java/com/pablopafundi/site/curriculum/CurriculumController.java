@@ -26,7 +26,7 @@ public class CurriculumController {
         byte[] pdf = pdfGenerationService.generatePdf(lang);
 
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=curriculum.pdf")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=PabloPafundiCV.pdf")
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(pdf);
     }

@@ -15,7 +15,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @AttributeOverride(name = "id", column = @Column(name = "id_contact"))
-@Table(name = "contact")
+@Table(
+        name = "contact",
+        indexes = {
+                @Index(name = "idx_lang", columnList = "lang")
+        })
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Contact extends BaseWithLang {
 

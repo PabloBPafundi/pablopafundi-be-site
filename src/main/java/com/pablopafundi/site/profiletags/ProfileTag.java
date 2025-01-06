@@ -17,12 +17,16 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 @AttributeOverride(name = "id", column = @Column(name = "id_profile_title"))
-@Table(name = "profile_tag")
+@Table(
+        name = "profile_tag",
+        indexes = {
+                @Index(name = "idx_lang", columnList = "lang")
+        })
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
 public class ProfileTag extends BaseEntity {
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String tagName;
 
     @ManyToOne(fetch = FetchType.LAZY)

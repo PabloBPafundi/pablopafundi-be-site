@@ -48,7 +48,7 @@ public class PdfGenerationService {
         try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
             PdfRendererBuilder builder = new PdfRendererBuilder();
             builder.useFastMode(); // Modo más rápido
-            builder.withHtmlContent(htmlContent, "file:./src/main/resources/"); // Base URL para recursos
+            //builder.withHtmlContent(htmlContent, "file:./src/main/resources/"); // Base URL para recursos
             builder.toStream(outputStream); // Salida al stream
             builder.run(); // Renderizar el PDF
             return outputStream.toByteArray();
