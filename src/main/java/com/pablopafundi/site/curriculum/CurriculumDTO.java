@@ -6,6 +6,7 @@ import com.pablopafundi.site.knowledge.KnowledgeResponseDTO;
 import com.pablopafundi.site.myprofile.MyProfileResponseDTO;
 import com.pablopafundi.site.workexperience.WorkExperienceResponseDTO;
 import lombok.Builder;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -25,4 +26,5 @@ public record CurriculumDTO(
 
         List<KnowledgeResponseDTO> knowledge
 
-){}
+) {
+}

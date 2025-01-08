@@ -13,16 +13,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@AttributeOverride(name = "id", column = @Column(name = "id_achivement"))
-
+@AttributeOverride(name = "id", column = @Column(name = "id_achievement"))
 @EqualsAndHashCode(callSuper = true)
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(
-        name = "achivement",
-        indexes = {
-        @Index(name = "idx_lang", columnList = "lang")
-})
-public class Achivement extends BaseWithLang {
+@Table(name = "achievement", indexes = {@Index(name = "idx_lang", columnList = "lang")})
+public class Achievement extends BaseWithLang {
 
     @NotEmpty
     @Column(unique = true, nullable = false)

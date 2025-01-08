@@ -1,26 +1,22 @@
 package com.pablopafundi.site.config;
 
 
-import jakarta.servlet.Filter;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
+import jakarta.servlet.*;
+
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class RateLimitingFilter implements Filter {
 
-    private static final int MAX_REQUESTS = 60;
+    private static final int MAX_REQUESTS = 120;
     private static final long TIME_WINDOW = 60 * 1000L;
 
     private final ConcurrentHashMap<String, RateLimitInfo> requestCounters = new ConcurrentHashMap<>();
 
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-            throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         String clientIp = request.getRemoteAddr();
 
 

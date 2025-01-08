@@ -21,18 +21,15 @@ public class ContactService {
     }
 
     @Async
-    public CompletableFuture<List<ContactResponseDTO>> getContact(LanguageEnum lang){
+    public CompletableFuture<List<ContactResponseDTO>> getContact(LanguageEnum lang) {
 
-        List<ContactResponseDTO> contact = contactRepository.findByIsActiveTrueAndLang(lang)
-                .stream()
-                .map(contactMapper::toContactResponseDTO)
-                .collect(Collectors.toList());
+        List<ContactResponseDTO> contact = contactRepository.findByIsActiveTrueAndLang(lang).stream().map(contactMapper::toContactResponseDTO).collect(Collectors.toList());
 
         return CompletableFuture.completedFuture(contact);
     }
 
 
-    public ContactResponseDTO saveContact(LanguageEnum lang, ContactDTO contactDTO){
+    public ContactResponseDTO saveContact(LanguageEnum lang, ContactDTO contactDTO) {
         var achievement = contactMapper.toContact(contactDTO);
         achievement.setLang(lang);
         return contactMapper.toContactResponseDTO(contactRepository.save(achievement));

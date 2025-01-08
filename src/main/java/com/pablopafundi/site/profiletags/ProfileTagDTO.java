@@ -6,13 +6,9 @@ import jakarta.validation.constraints.NotNull;
 
 public record ProfileTagDTO(
 
-        @JsonProperty("ProfileTagName")
-        @NotBlank(message = "ProfileTagName must be a valid value")
-        String profileTag,
+        @JsonProperty("ProfileTagName") @NotBlank(message = "ProfileTagName must be a valid value") String profileTag,
 
-        @JsonProperty("ProfileId")
-        @NotNull(message = "ProfileId must be a valid value")
-        Integer profileID
+        @JsonProperty("ProfileId") @NotNull(message = "ProfileId must be a valid value") Integer profileID
 
 ) {
 }

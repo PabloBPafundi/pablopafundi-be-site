@@ -14,8 +14,10 @@ public class CORSConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.addAllowedOriginPattern("https://pablopafundi-site.vercel.app");
-        config.addAllowedOriginPattern("https://*.pablopafundi-site.vercel.app"); // Subdominios
-        config.addAllowedOriginPattern("http://localhost:5173");  // React en desarrollo
+        config.addAllowedOriginPattern("https://*.pablopafundi-site.vercel.app");
+        config.addAllowedOriginPattern("https://*.pablopafundi.com");
+        config.addAllowedOriginPattern("https://pablopafundi.com");
+        config.addAllowedOriginPattern("http://localhost:5173");
 
         config.addAllowedMethod("*");
         config.addAllowedHeader("*");

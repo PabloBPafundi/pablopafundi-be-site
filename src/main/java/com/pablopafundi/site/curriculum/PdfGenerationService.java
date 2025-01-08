@@ -1,13 +1,14 @@
 package com.pablopafundi.site.curriculum;
 
 
+import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import com.pablopafundi.site.common.domain.LanguageEnum;
 import com.pablopafundi.site.knowledge.KnowledgeResponseDTO;
 import com.pablopafundi.site.knowledge.SkillType;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
+
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
@@ -26,13 +27,9 @@ public class PdfGenerationService {
 
         CurriculumDTO curriculumData = curriculumService.getCV(lang);
 
-        List<KnowledgeResponseDTO> knowLedgeLanguages = curriculumData.knowledge().stream()
-                .filter(knowledgeResponseDTO -> knowledgeResponseDTO.skillType() == SkillType.LANGUAGE)
-                .toList();
+        List<KnowledgeResponseDTO> knowLedgeLanguages = curriculumData.knowledge().stream().filter(knowledgeResponseDTO -> knowledgeResponseDTO.skillType() == SkillType.LANGUAGE).toList();
 
-        List<KnowledgeResponseDTO> knowLedges = curriculumData.knowledge().stream()
-                .filter(knowledgeResponseDTO -> knowledgeResponseDTO.skillType() != SkillType.LANGUAGE)
-                .toList();
+        List<KnowledgeResponseDTO> knowLedges = curriculumData.knowledge().stream().filter(knowledgeResponseDTO -> knowledgeResponseDTO.skillType() != SkillType.LANGUAGE).toList();
 
         Context context = new Context();
         context.setVariable("profile", curriculumData.myProfile());
@@ -47,13 +44,13 @@ public class PdfGenerationService {
 
         try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
             PdfRendererBuilder builder = new PdfRendererBuilder();
-            builder.useFastMode(); // Modo más rápido
-            //builder.withHtmlContent(htmlContent, "file:./src/main/resources/"); // Base URL para recursos
-            builder.toStream(outputStream); // Salida al stream
-            builder.run(); // Renderizar el PDF
+            builder.useFastMode();
+            builder.withHtmlContent(htmlContent, "file:./src/main/resources/");
+            builder.toStream(outputStream);
+            builder.run();
             return outputStream.toByteArray();
         } catch (Exception e) {
-            throw new RuntimeException("Error al generar el PDF con OpenHTMLToPDF", e);
+            throw new RuntimeException("Error", e);
         }
     }
 }

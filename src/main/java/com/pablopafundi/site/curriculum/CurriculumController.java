@@ -21,14 +21,11 @@ public class CurriculumController {
     }
 
     @GetMapping("{lang}/curriculum")
-    public ResponseEntity<byte[]> downloadPdf(@PathVariable("lang")LanguageEnum lang) {
+    public ResponseEntity<byte[]> downloadPdf(@PathVariable("lang") LanguageEnum lang) {
 
         byte[] pdf = pdfGenerationService.generatePdf(lang);
 
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=PabloPafundiCV.pdf")
-                .contentType(MediaType.APPLICATION_PDF)
-                .body(pdf);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=PabloPafundiCV.pdf").contentType(MediaType.APPLICATION_PDF).body(pdf);
     }
 
 

@@ -15,17 +15,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @AttributeOverride(name = "id", column = @Column(name = "id_contact"))
-@Table(
-        name = "contact",
-        indexes = {
-                @Index(name = "idx_lang", columnList = "lang")
-        })
+@Table(name = "contact", indexes = {@Index(name = "idx_lang", columnList = "lang")})
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Contact extends BaseWithLang {
 
 
     @NotNull(message = "Channel must have a value")
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private ContactChannel channel;
 
     @NotBlank(message = "Contact must have a value")

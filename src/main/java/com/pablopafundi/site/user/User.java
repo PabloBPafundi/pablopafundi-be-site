@@ -13,11 +13,7 @@ import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(
-        name = "app_user",
-        indexes = {
-                @Index(name = "idx_lang", columnList = "lang")
-        })
+@Table(name = "app_user", indexes = {@Index(name = "idx_lang", columnList = "lang")})
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
@@ -31,8 +27,7 @@ public class User extends BaseEntity implements UserDetails {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private Role role ;
-
+    private Role role;
 
 
     @Override

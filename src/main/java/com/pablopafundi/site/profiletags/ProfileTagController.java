@@ -3,7 +3,9 @@ package com.pablopafundi.site.profiletags;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ProfileTagController {
@@ -15,7 +17,7 @@ public class ProfileTagController {
     }
 
     @PostMapping("/profile-tag")
-    public ResponseEntity<ProfileTagResponseDTO> saveProfileTitle(@Valid @RequestBody ProfileTagDTO profileTagDTO){
+    public ResponseEntity<ProfileTagResponseDTO> saveProfileTitle(@Valid @RequestBody ProfileTagDTO profileTagDTO) {
         ProfileTagResponseDTO profileTitle = profileTagService.saveProfileTag(profileTagDTO);
         return ResponseEntity.ok(profileTitle);
 

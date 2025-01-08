@@ -9,21 +9,17 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 
-
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @Entity
 @AttributeOverride(name = "id", column = @Column(name = "id_work_experience"))
-@Table(name = "work_experience",
-        indexes = {
-                @Index(name = "idx_lang", columnList = "lang")
-        })
+@Table(name = "work_experience", indexes = {@Index(name = "idx_lang", columnList = "lang")})
 @Inheritance(strategy = InheritanceType.JOINED)
 public class WorkExperience extends BaseExperience {
 
 
-    public WorkExperience(String name, String description, LocalDate dateStart, LocalDate dateEnd, String siteURL){
+    public WorkExperience(String name, String description, LocalDate dateStart, LocalDate dateEnd, String siteURL) {
         super(name, description, dateStart, dateEnd, siteURL);
     }
 }

@@ -3,6 +3,7 @@ package com.pablopafundi.site.achivement;
 import com.pablopafundi.site.common.domain.LanguageEnum;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
@@ -11,33 +12,26 @@ import java.util.stream.Collectors;
 public class AchievementService {
 
     private final AchievementMapper achievementMapper;
-    private final AchivementRespository achivementRespository;
+    private final AchievementRepository achievementRepository;
 
-    public AchievementService(AchievementMapper achievementMapper, AchivementRespository achivementRespository) {
+    public AchievementService(AchievementMapper achievementMapper, AchievementRepository achievementRepository) {
         this.achievementMapper = achievementMapper;
-        this.achivementRespository = achivementRespository;
+        this.achievementRepository = achievementRepository;
     }
 
     @Async
     public CompletableFuture<List<AchievementResponseDTO>> getAchievements(LanguageEnum lang) {
-        List<AchievementResponseDTO> achievements = achivementRespository.findByIsActiveTrueAndLang(lang)
-                .stream()
-                .map(achievementMapper::toAchievementResponseDTO)
-                .collect(Collectors.toList());
-
+        List<AchievementResponseDTO> achievements = achievementRepository.findByIsActiveTrueAndLang(lang).stream().map(achievementMapper::toAchievementResponseDTO).collect(Collectors.toList());
         return CompletableFuture.completedFuture(achievements);
     }
 
 
-
-
-    public AchievementResponseDTO saveAchievement(LanguageEnum lang, AchievementDTO achievementDTO){
-        var achievement = achievementMapper.toAchivement(achievementDTO);
+    public AchievementResponseDTO saveAchievement(LanguageEnum lang, AchievementDTO achievementDTO) {
+        var achievement = achievementMapper.toAchievement(achievementDTO);
         achievement.setLang(lang);
-        return achievementMapper.toAchievementResponseDTO(achivementRespository.save(achievement));
+        return achievementMapper.toAchievementResponseDTO(achievementRepository.save(achievement));
 
     }
-
 
 
 }

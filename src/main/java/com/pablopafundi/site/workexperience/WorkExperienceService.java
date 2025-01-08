@@ -20,15 +20,6 @@ public class WorkExperienceService {
     }
 
 
-/*
-    public List<WorkExperienceResponseDTO> getLastFourJobsExperiences(LanguageEnum lang){
-
-        return workExperienceRepository.findTop4ByIsActiveAndLangOrderByDateStartDesc(true, lang)
-                .stream()
-                .map(workExperienceMapper::toworkExperienceResponseDTO)
-                .collect(Collectors.toList());
-    }*/
-
     @Async
     public CompletableFuture<List<WorkExperienceResponseDTO>> getLastFourJobsExperiences(LanguageEnum lang) {
         List<WorkExperienceResponseDTO> workExperiences = workExperienceRepository.findTop4ByIsActiveAndLangOrderByDateStartDesc(true, lang)
@@ -40,14 +31,12 @@ public class WorkExperienceService {
     }
 
 
-
     public WorkExperienceResponseDTO saveWorkExperience(WorkExperienceDTO workExperienceDTO, LanguageEnum lang){
         WorkExperience workExperience = workExperienceMapper.toWorkExperience(workExperienceDTO);
         workExperience.setLang(lang);
         var savedWorkExperience = workExperienceRepository.save(workExperience);
         return workExperienceMapper.toworkExperienceResponseDTO(savedWorkExperience);
     }
-
 
 
 

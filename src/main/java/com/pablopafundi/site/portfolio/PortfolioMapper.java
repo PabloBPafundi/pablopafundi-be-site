@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 public class PortfolioMapper {
 
 
-    public Portfolio toPortfolio(PortfolioDTO portfolioDTO){
+    public Portfolio toPortfolio(PortfolioDTO portfolioDTO) {
 
-        return new Portfolio(portfolioDTO.name(),portfolioDTO.description(), portfolioDTO.dateCompleted(), portfolioDTO.urlRepository());
+        return new Portfolio(portfolioDTO.name(), portfolioDTO.description(), portfolioDTO.dateCompleted(), portfolioDTO.urlRepository());
     }
 
-    public PortfolioResponseDTO ToPortfolioResponseDTO(Portfolio portfolio){
+    public PortfolioResponseDTO ToPortfolioResponseDTO(Portfolio portfolio) {
 
         return new PortfolioResponseDTO(portfolio.getName(), portfolio.getDescription(), portfolio.getDateCompleted(), portfolio.getUrlRepository());
     }

@@ -16,31 +16,22 @@ public class MyProfileMapper {
     }
 
 
-    public MyProfile toMyProfile(MyProfileDTO myProfileDTO){
+    public MyProfile toMyProfile(MyProfileDTO myProfileDTO) {
 
         return new MyProfile(myProfileDTO.residency(), myProfileDTO.aboutMe(), myProfileDTO.lang());
     }
 
-    public MyProfileDTO toMyProfileDTO(MyProfile myProfile){
+    public MyProfileDTO toMyProfileDTO(MyProfile myProfile) {
 
         return new MyProfileDTO(myProfile.getAboutMe(), myProfile.getResidency(), myProfile.getLang());
     }
 
-    public MyProfileResponseDTO toMyProfileResponseDTO(MyProfile myProfile){
+    public MyProfileResponseDTO toMyProfileResponseDTO(MyProfile myProfile) {
 
 
-        List<ProfileTagResponseDTO> profileResponseDTOList =
-                myProfile.getTitle() != null
-                        ? profileTagMapper.toProfileResponseDTOList(myProfile.getTitle())
-                        : List.of();
+        List<ProfileTagResponseDTO> profileResponseDTOList = myProfile.getTitle() != null ? profileTagMapper.toProfileResponseDTOList(myProfile.getTitle()) : List.of();
 
-        return new MyProfileResponseDTO(
-                myProfile.getId(),
-                myProfile.getResidency(),
-                myProfile.getAboutMe(),
-                myProfile.getProfileImageUrl(),
-                profileResponseDTOList
-        );
+        return new MyProfileResponseDTO(myProfile.getId(), myProfile.getResidency(), myProfile.getAboutMe(), myProfile.getProfileImageUrl(), profileResponseDTOList);
     }
 
 }

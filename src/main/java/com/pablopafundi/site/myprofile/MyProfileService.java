@@ -9,9 +9,9 @@ import com.pablopafundi.site.common.exception.BusinessLogicException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.scheduling.annotation.Async;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -26,12 +26,11 @@ public class MyProfileService {
 
     private final MyProfileRepository myProfileRepository;
     private final MyProfileMapper myProfileMapper;
+    private final Storage storage;
     @Value("${image.upload.dir}")
     private String uploadDir;
-
     @Value("${gcs.bucket.name}")
     private String BUCKET_NAME;
-    private final Storage storage;
 
     public MyProfileService(MyProfileRepository myProfileRepository, MyProfileMapper myProfileMapper) {
         this.myProfileRepository = myProfileRepository;
@@ -54,7 +53,6 @@ public class MyProfileService {
     }
 
 
-
     public void uploadProfileImageBucket(MultipartFile file) {
 
         List<MyProfile> profiles = myProfileRepository.findTop2ByIsActiveTrue();
@@ -62,10 +60,8 @@ public class MyProfileService {
         if (profiles.size() != 2) {
             throw new BusinessLogicException("In order to upload this image, there must be at least one active profile for every language available in the application. Please ensure that all languages have an active profile.");
         }
-
         String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
 
-        // Subir la imagen a Google Cloud Storage
         try {
             BlobInfo blobInfo = BlobInfo.newBuilder(BUCKET_NAME, fileName).build();
             storage.create(blobInfo, file.getBytes());
@@ -73,7 +69,6 @@ public class MyProfileService {
             throw new RuntimeException("Error al subir la imagen", e);
         }
 
-        // Guardar la URL pública de la imagen en la base de datos
         String imageUrl = "https://storage.googleapis.com/" + BUCKET_NAME + "/" + fileName;
         for (MyProfile profile : profiles) {
             profile.setProfileImageUrl(imageUrl);
@@ -108,23 +103,10 @@ public class MyProfileService {
         }
     }
 
-    /*
-    public MyProfileResponseDTO getAboutMe(LanguageEnum lang) {
-
-        MyProfile profile = myProfileRepository
-                .findTop1ByIsActiveTrueAndLangEquals(lang)
-                .orElseThrow(() -> new EntityNotFoundException("Profile with lenguage: '" + lang + "' not found "));
-
-        return myProfileMapper.toMyProfileResponseDTO(profile);
-    }*/
-
-
     @Transactional
     @Async
     public CompletableFuture<MyProfileResponseDTO> getAboutMe(LanguageEnum lang) {
-        MyProfile profile = myProfileRepository
-                .findTop1ByIsActiveTrueAndLangEquals(lang)
-                .orElseThrow(() -> new EntityNotFoundException("Profile with lenguage: '" + lang + "' not found "));
+        MyProfile profile = myProfileRepository.findTop1ByIsActiveTrueAndLangEquals(lang).orElseThrow(() -> new EntityNotFoundException("Profile with lenguage: '" + lang + "' not found "));
 
         return CompletableFuture.completedFuture(myProfileMapper.toMyProfileResponseDTO(profile));
     }

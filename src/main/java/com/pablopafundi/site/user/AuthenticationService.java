@@ -21,13 +21,10 @@ public class AuthenticationService {
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
 
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken( request.userName(), request.password() ));
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.userName(), request.password()));
 
 
-        var user =
-                userRepository
-                .findByUserName(request.userName())
-                .orElseThrow(() -> new UserNotFoundException("Usuario no encontrado: " + request.userName()));
+        var user = userRepository.findByUserName(request.userName()).orElseThrow(() -> new UserNotFoundException("Usuario no encontrado: " + request.userName()));
 
         var jwtToken = jwtService.generateToken(user);
 
@@ -35,10 +32,6 @@ public class AuthenticationService {
         return AuthenticationResponse.builder().token(jwtToken).build();
 
     }
-
-
-
-
 
 
 }

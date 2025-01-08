@@ -19,6 +19,7 @@ public abstract class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
 
@@ -44,8 +45,6 @@ public abstract class BaseEntity {
     protected void onUpdate() {
         this.lastModifiedAt = LocalDateTime.now();
     }
-
-
 
 
 }

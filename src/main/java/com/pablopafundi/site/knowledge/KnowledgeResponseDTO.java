@@ -6,20 +6,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public record KnowledgeResponseDTO(
 
 
-        @JsonProperty("KnowledgeId")
-        Integer knowledgeId,
+        @JsonProperty("KnowledgeId") Integer knowledgeId,
 
 
-        @JsonProperty("Name")
-        String name,
+        @JsonProperty("Name") String name,
 
 
-        @JsonProperty("SkillType")
-        SkillType skillType,
+        @JsonProperty("SkillType") SkillType skillType,
 
 
-        @JsonProperty("SkillLevel")
-        SkillLevel skillLevel
+        @JsonProperty("SkillLevel") SkillLevel skillLevel
 
 ) {
 }

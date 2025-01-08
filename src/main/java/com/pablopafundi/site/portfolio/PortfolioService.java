@@ -20,27 +20,16 @@ public class PortfolioService {
         this.portfolioRepository = portfolioRepository;
     }
 
-    /*
-    public List<PortfolioResponseDTO> getPortfolio(LanguageEnum lang){
-
-        return portfolioRepository.findByIsActiveTrueAndLang(lang)
-                .stream()
-                .map(portfolioMapper::ToPortfolioResponseDTO)
-                .collect(Collectors.toList());
-    }*/
 
     @Async
     public CompletableFuture<List<PortfolioResponseDTO>> getPortfolio(LanguageEnum lang) {
-        List<PortfolioResponseDTO> achievements = portfolioRepository.findByIsActiveTrueAndLang(lang)
-                .stream()
-                .map(portfolioMapper::ToPortfolioResponseDTO)
-                .collect(Collectors.toList());
+        List<PortfolioResponseDTO> achievements = portfolioRepository.findByIsActiveTrueAndLang(lang).stream().map(portfolioMapper::ToPortfolioResponseDTO).collect(Collectors.toList());
 
         return CompletableFuture.completedFuture(achievements);
     }
 
 
-    public PortfolioResponseDTO savePortfolio(LanguageEnum lang, PortfolioDTO portfolioDTO){
+    public PortfolioResponseDTO savePortfolio(LanguageEnum lang, PortfolioDTO portfolioDTO) {
         var portfolio = portfolioMapper.toPortfolio(portfolioDTO);
         portfolio.setLang(lang);
         return portfolioMapper.ToPortfolioResponseDTO(portfolioRepository.save(portfolio));

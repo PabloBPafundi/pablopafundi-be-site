@@ -10,8 +10,10 @@ import java.util.Optional;
 public interface MyProfileRepository extends JpaRepository<MyProfile, Integer> {
 
 
-   Optional<MyProfile> findTop1ByIsActiveTrueAndLangEquals(LanguageEnum lang);
-   List<MyProfile> findTop2ByIsActiveTrue();
-   MyProfile findTop1ByIsActiveTrue();
+    Optional<MyProfile> findTop1ByIsActiveTrueAndLangEquals(LanguageEnum lang);
+
+    List<MyProfile> findTop2ByIsActiveTrue();
+
+    MyProfile findTop1ByIsActiveTrue();
 
 }

@@ -1,8 +1,14 @@
 package com.pablopafundi.site.common.domain;
 
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.MappedSuperclass;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @MappedSuperclass
@@ -11,9 +17,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
-public abstract class BaseWithLang extends BaseEntity{
+public abstract class BaseWithLang extends BaseEntity {
 
-    //@NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "lang", nullable = false)
     private LanguageEnum lang;

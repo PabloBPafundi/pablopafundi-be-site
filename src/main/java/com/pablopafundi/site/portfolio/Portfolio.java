@@ -17,11 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @AttributeOverride(name = "id", column = @Column(name = "id_portfolio"))
-@Table(
-        name = "portfolio",
-        indexes = {
-                @Index(name = "idx_lang", columnList = "lang")
-        })
+@Table(name = "portfolio", indexes = {@Index(name = "idx_lang", columnList = "lang")})
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Portfolio extends BaseWithLang {
 

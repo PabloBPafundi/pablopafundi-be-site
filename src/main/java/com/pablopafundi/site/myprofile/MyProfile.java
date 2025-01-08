@@ -5,7 +5,10 @@ import com.pablopafundi.site.common.domain.BaseWithLang;
 import com.pablopafundi.site.common.domain.LanguageEnum;
 import com.pablopafundi.site.profiletags.ProfileTag;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
@@ -19,11 +22,7 @@ import java.util.List;
 @AttributeOverride(name = "id", column = @Column(name = "id_my_Profile"))
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
-@Table(
-        name = "my_profile",
-        indexes = {
-                @Index(name = "idx_lang", columnList = "lang")
-        })
+@Table(name = "my_profile", indexes = {@Index(name = "idx_lang", columnList = "lang")})
 public class MyProfile extends BaseWithLang {
 
     private String residency;

@@ -19,28 +19,15 @@ public class EducationService {
         this.educationRespository = educationRespository;
     }
 
-    /*
-    public List<EducationResponseDTO> getLastFourEducation(LanguageEnum lang){
-        return educationRespository.findTop4ByIsActiveAndLangOrderByDateStartDesc(true, lang)
-                .stream()
-                .map(educationMapper::toEducationResponseDTO)
-                .collect(Collectors.toList());
-    }*/
-
-
     @Async
     public CompletableFuture<List<EducationResponseDTO>> getLastFourEducation(LanguageEnum lang) {
-        List<EducationResponseDTO> education = educationRespository.findTop4ByIsActiveAndLangOrderByDateStartDesc(true, lang)
-                .stream()
-                .map(educationMapper::toEducationResponseDTO)
-                .collect(Collectors.toList());
+        List<EducationResponseDTO> education = educationRespository.findTop4ByIsActiveAndLangOrderByDateStartDesc(true, lang).stream().map(educationMapper::toEducationResponseDTO).collect(Collectors.toList());
 
         return CompletableFuture.completedFuture(education);
     }
 
 
-
-    public EducationResponseDTO saveEducation(LanguageEnum lang, EducationDTO educationDTO){
+    public EducationResponseDTO saveEducation(LanguageEnum lang, EducationDTO educationDTO) {
         var education = educationMapper.toEducation(educationDTO);
         education.setLang(lang);
         var savedEducation = educationRespository.save(education);

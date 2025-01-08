@@ -6,14 +6,13 @@ import org.springframework.stereotype.Service;
 public class ContactMapper {
 
 
+    public Contact toContact(ContactDTO contactDTO) {
 
-    public Contact toContact(ContactDTO contactDTO){
-
-        return new Contact(contactDTO.channel(),contactDTO.contactDescription(), contactDTO.url());
+        return new Contact(contactDTO.channel(), contactDTO.contactDescription(), contactDTO.url());
     }
 
 
-    public ContactResponseDTO toContactResponseDTO(Contact contact){
+    public ContactResponseDTO toContactResponseDTO(Contact contact) {
 
         return new ContactResponseDTO(contact.getChannel(), contact.getContact(), contact.getUrl());
     }

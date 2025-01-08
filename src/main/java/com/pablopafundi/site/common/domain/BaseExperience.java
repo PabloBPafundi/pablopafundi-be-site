@@ -17,14 +17,10 @@ import java.time.LocalDate;
 @EqualsAndHashCode(callSuper = true)
 public abstract class BaseExperience extends BaseWithLang {
 
-    @Column(
-            unique = true
-    )
+    @Column(unique = true)
     private String name;
 
-    @Column(
-           length = 400
-    )
+    @Column(length = 400)
     private String description;
 
     private LocalDate dateStart;
@@ -32,7 +28,6 @@ public abstract class BaseExperience extends BaseWithLang {
     private LocalDate dateEnd;
 
     private String siteURL;
-
 
 
 }

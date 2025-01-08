@@ -4,14 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public record ProfileTagResponseDTO(
 
-        @JsonProperty("ProfileTagName")
-        String profileTag,
+        @JsonProperty("ProfileTagName") String profileTag,
 
-        @JsonProperty("ProfileTagId")
-        Integer profileTagId,
+        @JsonProperty("ProfileTagId") Integer profileTagId,
 
-        @JsonProperty("ProfileId")
-        Integer profileID
+        @JsonProperty("ProfileId") Integer profileID
 
 ) {
 }

@@ -22,8 +22,7 @@ public class ProfileTagMapper {
 
     public ProfileTag toProfileTitle(ProfileTagDTO profileTagDTO) {
 
-        MyProfile profile = myProfileRepository.findById(profileTagDTO.profileID())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Profile not found"));
+        MyProfile profile = myProfileRepository.findById(profileTagDTO.profileID()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Profile not found"));
 
         return new ProfileTag(profileTagDTO.profileTag(), profile);
     }
@@ -33,10 +32,8 @@ public class ProfileTagMapper {
         return new ProfileTagResponseDTO(profileTags.getTagName(), profileTags.getId(), profileTags.getProfile().getId());
     }
 
-    public List<ProfileTagResponseDTO> toProfileResponseDTOList(List<ProfileTag> profileTagsList){
-        return profileTagsList.stream()
-                .map(this::toProfileResponseDTO)
-                .toList(); // Usamos toList() para devolver una lista inmutable
+    public List<ProfileTagResponseDTO> toProfileResponseDTOList(List<ProfileTag> profileTagsList) {
+        return profileTagsList.stream().map(this::toProfileResponseDTO).toList(); // Usamos toList() para devolver una lista inmutable
     }
 
 

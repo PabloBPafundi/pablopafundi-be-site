@@ -14,22 +14,18 @@ public class AchievementController {
 
     private final AchievementService achievementService;
 
-
     public AchievementController(AchievementService achievementService) {
         this.achievementService = achievementService;
     }
 
     @GetMapping("public/{lang}/achievements")
     public CompletableFuture<ResponseEntity<List<AchievementResponseDTO>>> getAchievements(@PathVariable("lang") LanguageEnum lang) {
-        return achievementService.getAchievements(lang)
-                .thenApply(ResponseEntity::ok);
+        return achievementService.getAchievements(lang).thenApply(ResponseEntity::ok);
     }
 
     @PostMapping("/{lang}/achievements")
-    public ResponseEntity<AchievementResponseDTO> saveAchievement(@PathVariable("lang") LanguageEnum lang,@Valid @RequestBody AchievementDTO achievementDTO){
+    public ResponseEntity<AchievementResponseDTO> saveAchievement(@PathVariable("lang") LanguageEnum lang, @Valid @RequestBody AchievementDTO achievementDTO) {
         return ResponseEntity.ok(achievementService.saveAchievement(lang, achievementDTO));
     }
-
-
 
 }

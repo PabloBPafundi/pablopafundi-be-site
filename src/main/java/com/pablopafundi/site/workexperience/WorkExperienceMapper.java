@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public class WorkExperienceMapper {
 
 
-    public WorkExperience toWorkExperience(WorkExperienceDTO workExperienceDTO){
+    public WorkExperience toWorkExperience(WorkExperienceDTO workExperienceDTO) {
 
         return new WorkExperience(workExperienceDTO.name(), workExperienceDTO.description(), workExperienceDTO.dateStart(), workExperienceDTO.dateEnd(), workExperienceDTO.siteURL());
     }
@@ -17,7 +17,7 @@ public class WorkExperienceMapper {
     }
 
 
-    public WorkExperienceDTO toWorkExperienceDTO(WorkExperience workExperience){
+    public WorkExperienceDTO toWorkExperienceDTO(WorkExperience workExperience) {
         return new WorkExperienceDTO(workExperience.getName(), workExperience.getDescription(), workExperience.getDateStart(), workExperience.getDateEnd(), workExperience.getSiteURL());
     }
 

@@ -8,22 +8,13 @@ import java.time.LocalDate;
 
 public record PortfolioDTO(
 
-       @JsonProperty("Name")
-       @NotBlank(message = "Name must have a valid value")
-       String name,
+        @JsonProperty("Name") @NotBlank(message = "Name must have a valid value") String name,
 
-       @JsonProperty("Description")
-       @NotBlank(message = "Description must have a valid value")
-       String description,
+        @JsonProperty("Description") @NotBlank(message = "Description must have a valid value") String description,
 
-       @JsonProperty("DateCompleted")
-       @NotNull(message = "DateCompleted must have a valid value")
-       LocalDate dateCompleted,
+        @JsonProperty("DateCompleted") @NotNull(message = "DateCompleted must have a valid value") LocalDate dateCompleted,
 
-       @JsonProperty("URLRepository")
-       @NotBlank(message = "URLRepository must have a valid value")
-       String urlRepository
-
+        @JsonProperty("URLRepository") @NotBlank(message = "URLRepository must have a valid value") String urlRepository
 
 
 ) {

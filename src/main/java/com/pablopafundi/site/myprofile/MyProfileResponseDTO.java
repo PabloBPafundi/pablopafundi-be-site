@@ -5,23 +5,18 @@ import com.pablopafundi.site.profiletags.ProfileTagResponseDTO;
 
 import java.util.List;
 
-public record MyProfileResponseDTO (
+public record MyProfileResponseDTO(
 
 
-        @JsonProperty("ProfileId")
-        Integer profileId,
+        @JsonProperty("ProfileId") Integer profileId,
 
-        @JsonProperty("Residency")
-        String residency,
+        @JsonProperty("Residency") String residency,
 
-        @JsonProperty("AboutMe")
-        String aboutMe,
+        @JsonProperty("AboutMe") String aboutMe,
 
-        @JsonProperty("ProfileImage")
-        String profileImageUrl,
+        @JsonProperty("ProfileImage") String profileImageUrl,
 
-        @JsonProperty("ProfileTags")
-        List<ProfileTagResponseDTO> profileTags
+        @JsonProperty("ProfileTags") List<ProfileTagResponseDTO> profileTags
 
 
 ) {

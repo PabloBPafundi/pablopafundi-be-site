@@ -6,12 +6,8 @@ import lombok.Builder;
 
 
 @Builder
-public record AuthenticationRequest (
-        @JsonProperty("UserName")
-        @NotBlank(message = "Username must have a valid value")
-        String userName,
+public record AuthenticationRequest(
+        @JsonProperty("UserName") @NotBlank(message = "Username must have a valid value") String userName,
 
-        @JsonProperty("Password")
-        @NotBlank(message = "Password must have a valid value")
-        String password
-){}
+        @JsonProperty("Password") @NotBlank(message = "Password must have a valid value") String password) {
+}

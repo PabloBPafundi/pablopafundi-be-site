@@ -8,18 +8,12 @@ public record MyProfileDTO
         (
 
 
-               @JsonProperty("Residency")
-               @NotBlank(message = "Residency must be a valid value")
-               String residency,
+                @JsonProperty("Residency") @NotBlank(message = "Residency must be a valid value") String residency,
 
-               @JsonProperty("AboutMe")
-               @NotBlank(message = "AboutMe must be a valid value")
-               String aboutMe,
+                @JsonProperty("AboutMe") @NotBlank(message = "AboutMe must be a valid value") String aboutMe,
 
-               @JsonProperty("Language")
-               LanguageEnum lang
+                @JsonProperty("Language") LanguageEnum lang
 
 
-        )
-{
+        ) {
 }

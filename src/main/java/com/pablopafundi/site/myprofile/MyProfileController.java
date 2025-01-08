@@ -5,13 +5,13 @@ import com.pablopafundi.site.common.domain.LanguageEnum;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.core.io.Resource;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,9 +30,6 @@ public class MyProfileController {
         this.myProfileService = myProfileService;
     }
 
-
-
-    // ENDPOINT PARA SUBIR UNA IMAGEN
     @PostMapping("/upload-image-bucket")
     public ResponseEntity<String> uploadProfileImageBucket(@RequestParam("file") MultipartFile file) {
         myProfileService.uploadProfileImageBucket(file);
@@ -48,7 +45,6 @@ public class MyProfileController {
             URL url = new URL(imageUrl);
             Resource resource = new UrlResource(url);
 
-
             String contentType = "application/octet-stream";
 
             if (filename.endsWith(".jpg") || filename.endsWith(".jpeg")) {
@@ -56,9 +52,7 @@ public class MyProfileController {
             } else if (filename.endsWith(".png")) {
                 contentType = "image/png";
             }
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_TYPE, contentType)
-                    .body(resource);
+            return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, contentType).body(resource);
 
         } catch (MalformedURLException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -68,15 +62,13 @@ public class MyProfileController {
     }
 
 
-
-    // ENDPOINT PARA SUBIR UNA IMAGEN
     @PostMapping("/upload-image")
     public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) {
         myProfileService.uploadProfileImage(file);
         return ResponseEntity.ok("Image upload");
     }
 
-    // ENDPOIN PARA OBTENER IMAGEN
+
     @GetMapping("/public/images/{filename}")
     public ResponseEntity<Resource> getImage(@PathVariable String filename) throws IOException {
         // Ruta completa del archivo en el sistema de archivos
@@ -88,29 +80,14 @@ public class MyProfileController {
 
         Resource image = new FileSystemResource(file);
 
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-                .body(image);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "image/jpeg").body(image);
     }
-
-
-    // ENDPOINT PARA OBTENER EL PERFIL COMPLETO
-    /*
-    @GetMapping("/public/{lang}/my-profile")
-    public ResponseEntity<MyProfileResponseDTO> getMyProfile(@PathVariable("lang") LanguageEnum lang) {
-        MyProfileResponseDTO profile = myProfileService.getAboutMe(lang);
-        return ResponseEntity.ok(profile);
-    }*/
-
 
     @GetMapping("/public/{lang}/my-profile")
     public CompletableFuture<ResponseEntity<MyProfileResponseDTO>> getMyProfile(@PathVariable("lang") LanguageEnum lang) {
-        return myProfileService.getAboutMe(lang)
-                .thenApply(ResponseEntity::ok);
+        return myProfileService.getAboutMe(lang).thenApply(ResponseEntity::ok);
     }
 
-
-    // ENDPOINT PARA INSERTAR UN PERFIL
     @PostMapping("/{lang}/my-profile")
     public ResponseEntity<?> saveProfile(@Valid @RequestBody MyProfileDTO profileDTO, @PathVariable("lang") LanguageEnum lang) {
         MyProfileResponseDTO profile = myProfileService.saveMyProfile(profileDTO, lang);

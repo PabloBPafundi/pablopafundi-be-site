@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface AchivementRespository extends JpaRepository<Achivement, Integer> {
+public interface AchievementRepository extends JpaRepository<Achievement, Integer> {
 
-    List<Achivement> findByIsActiveTrueAndLang(LanguageEnum languageEnum);
+    List<Achievement> findByIsActiveTrueAndLang(LanguageEnum languageEnum);
 }

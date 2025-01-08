@@ -16,7 +16,6 @@ public record WorkExperienceResponseDTO(
         String description,
 
         @JsonProperty("DateStarted")
-
         LocalDate dateStart,
 
         @JsonProperty("DateEnd")

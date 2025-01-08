@@ -24,23 +24,14 @@ public class UserService {
 
     public void createUser(String userName, String password, Role role) {
         String encodedPassword = passwordEncoder.encode(password);
-        User user =
-                User.builder()
-                .userName(userName)
-                .password(encodedPassword)
-                .role(role)
-                .build();
+        User user = User.builder().userName(userName).password(encodedPassword).role(role).build();
         userRepository.save(user);
 
     }
 
     public UserResponseDTO createUser(UserDTO userDTO) {
         String encodedPassword = passwordEncoder.encode(userDTO.password());
-        User user = User.builder()
-                .userName(userDTO.userName())
-                .password(encodedPassword)
-                .role(userDTO.role())
-                .build();
+        User user = User.builder().userName(userDTO.userName()).password(encodedPassword).role(userDTO.role()).build();
         return userMapper.toUserResponseDTO((userRepository.save(user)));
     }
 

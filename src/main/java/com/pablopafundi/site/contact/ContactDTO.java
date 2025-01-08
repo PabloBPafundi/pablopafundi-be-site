@@ -7,17 +7,12 @@ import jakarta.validation.constraints.NotNull;
 public record ContactDTO(
 
 
-        @JsonProperty("Channel")
-        @NotNull(message = "Channel must have a value")
-        ContactChannel channel,
+        @JsonProperty("Channel") @NotNull(message = "Channel must have a value") ContactChannel channel,
 
-        @JsonProperty("Contact")
-        @NotBlank(message = "Contact must have a value")
-        String contactDescription,
+        @JsonProperty("Contact") @NotBlank(message = "Contact must have a value") String contactDescription,
 
 
-        @JsonProperty("URL")
-        String url
+        @JsonProperty("URL") String url
 
 
 ) {

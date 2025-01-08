@@ -2,9 +2,7 @@ package com.pablopafundi.site.keygeneration;
 
 public enum KeySize {
 
-    BITS_256(256),
-    BITS_384(384),
-    BITS_512(512);
+    BITS_256(256), BITS_384(384), BITS_512(512);
 
     private final int bitLength;
 
@@ -17,3 +15,4 @@ public enum KeySize {
     }
 
 }
+
