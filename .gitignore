@@ -45,4 +45,5 @@ src/main/resources/application-dev.properties
 src/main/resources/application-prod.properties
 src/main/resources/application-test.properties
 src\main\java\com\pablopafundi\site\config\CORSConfig.java
+src\main\java\com\pablopafundi\site\SiteApplication.java
 .env
