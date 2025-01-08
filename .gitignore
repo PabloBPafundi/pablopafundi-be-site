@@ -4,13 +4,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### Ignorar la carpeta de pruebas ###
-src/test/
 
-###  Ignorar el Site Application ###
 src/main/java/com/pablopafundi/site/SiteApplication
 
-### STS ###
 .apt_generated
 .classpath
 .factorypath
@@ -19,13 +15,12 @@ src/main/java/com/pablopafundi/site/SiteApplication
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
+
 /nbproject/private/
 /nbbuild/
 /dist/
@@ -38,12 +33,12 @@ build/
 ### VS Code ###
 .vscode/
 
-### Configuración sensible (Spring) ###
-# Ignorar archivos de configuración confidencial
+
 src/main/resources/application.yml
 src/main/resources/application-dev.properties
 src/main/resources/application-prod.properties
 src/main/resources/application-test.properties
-src\main\java\com\pablopafundi\site\config\CORSConfig.java
-src\main\java\com\pablopafundi\site\SiteApplication.java
+src/main/java/com/pablopafundi/site/config/CORSConfig.java
+src/main/java/com/pablopafundi/site/SiteApplication.java
+src/test/
 .env
